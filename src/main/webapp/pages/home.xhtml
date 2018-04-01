@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>TempHumidDashboard</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:panelGrid columns="2">
+                <p:panelGrid>
+                    <p:row>
+                        <p:column colspan="4">
+                            <p:clock autoSync="true" mode="client" pattern="dd/MMM/yyyy hh:mm:ss a"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Start Time"/>
+                        </p:column>
+                        <p:column>
+                            <p:calendar type="" value="#{chartView.startTime}"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="End Time"/>
+                        </p:column>
+                        <p:column>
+                            <p:calendar type="" value="#{chartView.endTime}"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column/>
+                        <p:column/>
+                        <p:column/>
+                        <p:column>
+                            <p:commandButton value="Submit" actionListener="#{chartView.extractDataFromSensor}" update="chartDisplay chartMinMax"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+                <p:panelGrid id="chartMinMax">
+                    <p:row>
+                        <p:column></p:column>
+                        <p:column>Min</p:column>
+                        <p:column>Max</p:column>
+                        <p:column>Avg</p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>Temperature</p:column>
+                        <p:column>#{chartView.minTemp}</p:column>
+                        <p:column>#{chartView.maxTemp}</p:column>
+                        <p:column>#{chartView.avgTemp}</p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>Humidity</p:column>
+                        <p:column>#{chartView.minHumid}</p:column>
+                        <p:column>#{chartView.maxHumid}</p:column>
+                        <p:column>#{chartView.avgHumid}</p:column>
+                    </p:row>
+                </p:panelGrid>
+            </p:panelGrid>
+            <p:chart id="chartDisplay" type="line" model="#{chartView.chartModel}" style="height:600px;" responsive="true"/>
+        </h:form>
+    </h:body>
+</html>
