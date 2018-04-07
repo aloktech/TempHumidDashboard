@@ -35,7 +35,8 @@
                         <p:column/>
                         <p:column/>
                         <p:column>
-                            <p:commandButton value="Submit" actionListener="#{chartView.extractDataFromSensor}" update="chartDisplay chartMinMax"/>
+                            <p:commandButton value="Submit" actionListener="#{chartView.extractDataFromSensor}" 
+                                             update="chartDisplay chartMinMax" process="@this"/>
                         </p:column>
                     </p:row>
                 </p:panelGrid>
@@ -50,13 +51,21 @@
                         <p:column>Temperature</p:column>
                         <p:column>#{chartView.minTemp}</p:column>
                         <p:column>#{chartView.maxTemp}</p:column>
-                        <p:column>#{chartView.avgTemp}</p:column>
+                        <p:column >
+                            <h:outputLabel value="#{chartView.avgTemp}">
+                                <f:convertNumber pattern="###.##"/>                                
+                            </h:outputLabel>
+                        </p:column>
                     </p:row>
                     <p:row>
                         <p:column>Humidity</p:column>
                         <p:column>#{chartView.minHumid}</p:column>
                         <p:column>#{chartView.maxHumid}</p:column>
-                        <p:column>#{chartView.avgHumid}</p:column>
+                        <p:column>
+                            <h:outputLabel value="#{chartView.avgHumid}">
+                                <f:convertNumber pattern="###.##"/>                           
+                            </h:outputLabel>
+                        </p:column>
                     </p:row>
                 </p:panelGrid>
             </p:panelGrid>
